@@ -7,11 +7,11 @@ ZONE_ID="Z0906595WCJPC66S1LJS"
 DOMAIN_NAME="devaws84s.online"
 
 
-for instsance in ${INSTANCES[@]}
+for instance in ${INSTANCES[@]}
 do
     INSTANCE_ID=$(aws ec2 run-instances --image-id ami-0220d79f3f480ecf5 --instance-type t2.micro 
     --security-group-ids sg-0beda789759f4ad50 --tag-specifications "ResourceType=instance,
-    Tags=[{Key=Name, Value=test}]" --query "Instances[0].InstanceId" --output text)
+    Tags=[{Key=Name, Value=$instance}]" --query "Instances[0].InstanceId" --output text)
     if [ $instance != "frontend"]
     then
         IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID 
